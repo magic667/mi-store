@@ -121,12 +121,14 @@ export default {
     // 通过订单信息，计算出各个订单的商品数量和总价
     orders(val) {
       let total = [];
-      for (let i = 0; i < val.length; i++) {
-        const element = val[i];
+      for (let i of val) {
+        const element = i;
         let totalNum = 0;
         let totalPrice = 0;
-        for (let j = 0; j < element.length; j++) {
+        console.log(i);
+        for (let j in element) {
           const temp = element[j];
+          console.log(temp);
           totalNum += temp.product_num;
           totalPrice += temp.product_price * temp.product_num;
         }

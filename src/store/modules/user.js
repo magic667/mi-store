@@ -28,8 +28,8 @@ export default {
     },
     // 根据后台收藏数据更新喜欢按钮颜色
     changeMyLikeType(state) {
-      for (let i = 0; i < state.myCollect.length; i++) {
-        const temp = state.myCollect[i];
+      for (let i of state.myCollect) {
+        const temp = i;
         // 收藏数据存在此id，而且like数组中不包含此id，将此id装入like数组
         if (temp.product_id && !state.like.includes(temp.product_id)) {
           state.like.push(temp.product_id);
