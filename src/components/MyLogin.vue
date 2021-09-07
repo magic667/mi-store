@@ -85,7 +85,7 @@ export default {
                 this.isLogin = false;
                 // 保存登录信息到本地
                 let user = JSON.stringify(res.data.user);
-                localStorage.setItem("user", user);
+                sessionStorage.setItem("user", user);
                 // 保存登录信息到vuex
                 this.setUser(res.data.user);
                 // 弹出通知框提示登录成功信息

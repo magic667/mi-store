@@ -125,10 +125,8 @@ export default {
         const element = i;
         let totalNum = 0;
         let totalPrice = 0;
-        console.log(i);
         for (let j in element) {
           const temp = element[j];
-          console.log(temp);
           totalNum += temp.product_num;
           totalPrice += temp.product_price * temp.product_num;
         }

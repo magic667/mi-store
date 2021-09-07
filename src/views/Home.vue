@@ -23,11 +23,9 @@
           </div>
           <div class="box-bd">
             <div class="promo-list">
-              <router-link to>
-                <div class="trans">
-                  <img :src="$target + 'public/imgs/phone/phone.png'" />
-                </div>
-              </router-link>
+              <div class="trans">
+                <img :src="$target + 'public/imgs/phone/phone.png'" />
+              </div>
             </div>
             <div class="list">
               <MyList :list="phoneList" :isMore="true"></MyList>

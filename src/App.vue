@@ -60,7 +60,7 @@
         <el-menu-item index="/goods">全部商品</el-menu-item>
         <div class="so">
           <el-input
-            @keyup.enter.native="searchClick"
+            @keydown.enter.native="searchClick"
             placeholder="请输入搜索内容"
             v-model="search"
           >
@@ -138,9 +138,9 @@ export default {
   },
   created() {
     // 判断用户是否已经登录(防止页面刷新后状态变化)
-    if (localStorage.getItem("user")) {
+    if (sessionStorage.getItem("user")) {
       // 如果已经登录，设置vuex登录状态
-      this.setUser(JSON.parse(localStorage.getItem("user")));
+      this.setUser(JSON.parse(sessionStorage.getItem("user")));
     }
   },
   computed: {
@@ -186,7 +186,7 @@ export default {
     logout() {
       this.visible = false;
       // 清空本地登录信息
-      localStorage.setItem("user", "");
+      sessionStorage.setItem("user", "");
       // 清空vuex登录信息
       this.setUser("");
       this.notifySucceed("成功退出登录");
@@ -199,7 +199,10 @@ export default {
     searchClick() {
       if (this.search != "") {
         // 跳转到全部商品页面，并传递搜索条件
-        this.$router.push({ path: "/goods", query: { search: this.search } });
+        this.$router.push({
+          path: "/goods",
+          query: { search: this.search },
+        });
         this.search = "";
       }
     },
