@@ -15,7 +15,7 @@
     <div class="nav">
       <div class="product-nav">
         <div class="title">分类</div>
-        <el-tabs type="card" v-model="activeName">
+        <el-tabs type="card" v-model="activeName" @tab-click="clearSearch">
           <el-tab-pane
             v-for="item in categoryList"
             :key="item.category_id"
@@ -30,9 +30,9 @@
     <div class="main">
       <div class="list">
         <MyList :list="product" v-if="product.length > 0"></MyList>
-        <div v-else class="none-product">
+        <!-- <div v-else class="none-product">
           抱歉没有找到相关的商品，请看看其他的商品
-        </div>
+        </div> -->
       </div>
       <!-- 分页 -->
       <div class="pagination">
@@ -97,18 +97,20 @@ export default {
     activeName(val) {
       if (val == 0) {
         this.categoryID = [];
-      }
-      if (val > 0) {
+      } else if (val > 0) {
         this.categoryID = [Number(val)];
       }
       // 初始化商品总量和当前页码
       this.total = 0;
       this.currentPage = 1;
-      // 更新地址栏链接，方便刷新页面可以回到原来的页面
-      this.$router.push({
-        path: "/goods",
-        query: { categoryID: this.categoryID },
-      });
+      // 没有搜索的情况下，更新地址栏链接，方便刷新页面可以回到原来的页面
+      // 防止搜索时，搜索id被分类id覆盖
+      if (this.search == "") {
+        this.$router.push({
+          path: "/goods",
+          query: { categoryID: this.categoryID },
+        });
+      }
     },
     // 监听分类id，响应相应的商品
     categoryID() {
@@ -125,7 +127,6 @@ export default {
     $route(val) {
       if (val.path == "/goods") {
         if (val.query.search != undefined) {
-          this.activeName = "-1";
           this.currentPage = 1;
           this.total = 0;
           this.search = val.query.search;
@@ -134,6 +135,10 @@ export default {
     },
   },
   methods: {
+    // 点击分类栏，清除搜索数据
+    clearSearch() {
+      this.search = "";
+    },
     // 请求分类列表数据
     getCategory() {
       this.$axios
@@ -189,11 +194,12 @@ export default {
     // 页码变化调用currentchange事件
     currentChange(currentPage) {
       this.currentPage = currentPage;
-      // if (this.search != "") {
-      //   this.getProductBySearch();
-      // } else {
-      this.getData();
-      // }
+      // 请求下一页搜索数据
+      if (this.search != "") {
+        this.getProductBySearch();
+      } else {
+        this.getData();
+      }
     },
   },
 };
