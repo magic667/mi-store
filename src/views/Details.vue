@@ -137,20 +137,6 @@ export default {
     productID(val) {
       this.getDetail(val);
       this.getDetailsPicture(val);
-      // 从后台获取收藏信息(防止刷新丢失数据)
-      this.$axios
-        .post("/api/user/collect/getCollect", {
-          user_id: this.$store.getters.getUser.user_id,
-        })
-        .then((res) => {
-          if (res.data.code == "001") {
-            this.$store.dispatch("setMyCollect", res.data.collectList);
-            this.$store.dispatch("changeMyLikeType");
-          }
-        })
-        .catch((err) => {
-          return Promise.reject(err);
-        });
     },
   },
   methods: {

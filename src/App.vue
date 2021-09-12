@@ -170,6 +170,21 @@ export default {
           .catch((err) => {
             return Promise.reject(err);
           });
+        // 从后台获取该用户收藏信息
+        this.$axios
+          .post("/api/user/collect/getCollect", {
+            user_id: this.$store.getters.getUser.user_id,
+          })
+          .then((res) => {
+            if (res.data.code == "001") {
+              // 更新详情页收藏商品的喜欢按钮样式
+              this.$store.dispatch("setMyCollect", res.data.collectList);
+              this.$store.dispatch("changeMyLikeType");
+            }
+          })
+          .catch((err) => {
+            return Promise.reject(err);
+          });
       }
     },
   },
