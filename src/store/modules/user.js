@@ -43,25 +43,31 @@ export default {
       let index = state.like.indexOf(data);
       state.like.splice(index, 1);
     },
+    clearMyLikeType(state) {
+      state.like = [];
+    }
   },
   actions: {
     setUser({ commit }, data) {
-      commit('setUser', data)
+      commit('setUser', data);
     },
     setShowLogin({ commit }, data) {
-      commit('setShowLogin', data)
+      commit('setShowLogin', data);
     },
     setMyCollect({ commit }, data) {
-      commit('setMyCollect', data)
+      commit('setMyCollect', data);
     },
     changeMyLikeType({ commit }) {
-      commit('changeMyLikeType')
+      commit('changeMyLikeType');
     },
     addMyLikeType({ commit }, data) {
-      commit('addMyLikeType', data)
+      commit('addMyLikeType', data);
     },
     deleteMyLikeType({ commit }, data) {
-      commit('deleteMyLikeType', data)
+      commit('deleteMyLikeType', data);
     },
+    clearMyLikeType({ commit }, data) {
+      commit('clearMyLikeType', data);
+    }
   }
 }

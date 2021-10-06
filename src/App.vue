@@ -150,8 +150,9 @@ export default {
     // 获取vuex的登录状态
     getUser(val) {
       if (val === "") {
-        // 用户没有登录
+        // 用户没有登录, 清空购物车和喜欢按钮样式
         this.setShoppingCart([]);
+        this.$store.dispatch("clearMyLikeType");
       } else {
         // 用户已经登录,获取该用户的购物车信息
         this.$axios
