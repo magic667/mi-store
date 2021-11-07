@@ -1,9 +1,3 @@
-# mi-store
-
-## Clone project
-```
-git clone https://github.com/magic667/mi-store.git
-```
 
 ## Project setup
 ```
