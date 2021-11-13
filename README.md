@@ -1,4 +1,9 @@
+
+## mi-store
+```
 基于Vue+Vue-Router+Vuex+Element-ui+axios，参考小米商城
+```
+
 ## Project setup
 ```
 npm install
@@ -13,11 +18,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
