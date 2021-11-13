@@ -1,4 +1,4 @@
-
+基于Vue+Vue-Router+Vuex+Element-ui+axios，参考小米商城
 ## Project setup
 ```
 npm install
